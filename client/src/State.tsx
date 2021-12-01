@@ -17,8 +17,8 @@ import { WaveformVisualizer } from './visualizers/Waveform';
  */
 export type AppState = Map<string, any>;
 
-const instruments = List([PianoInstrument]);
-const visualizers = List([WaveformVisualizer]);
+const instruments = List([PianoInstrument,wrattan_Instrument]);
+const visualizers = List([WaveformVisualizer,wrattan_Visualizer]);
 export const defaultState: AppState = Map<string, any>({
   instruments,
   visualizers,
