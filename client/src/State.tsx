@@ -10,6 +10,9 @@ import { wrattan_Visualizer } from './visualizers/wrattan';
 import { DrumInstrument } from './instruments/zrodr';
 import { CircleVisualizer } from './visualizers/zrodr';
 
+import { ColorfulVisualizer } from './visualizers/JoshLikesToCode';
+import { Xylophone } from './instruments/JoshLikesToCode';
+
 /** ------------------------------------------------------------------------ **
  * The entire application state is stored in AppState.
  ** ------------------------------------------------------------------------ */
@@ -22,8 +25,8 @@ import { CircleVisualizer } from './visualizers/zrodr';
  */
 export type AppState = Map<string, any>;
 
-const instruments = List([PianoInstrument,wrattan_Instrument, DrumInstrument]);
-const visualizers = List([WaveformVisualizer,wrattan_Visualizer, CircleVisualizer]);
+const instruments = List([PianoInstrument,wrattan_Instrument, DrumInstrument, Xylophone]);
+const visualizers = List([WaveformVisualizer,wrattan_Visualizer, CircleVisualizer, ColorfulVisualizer]);
 export const defaultState: AppState = Map<string, any>({
   instruments,
   visualizers,
