@@ -2,6 +2,7 @@
 import classNames from 'classnames';
 import { List } from 'immutable';
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import {
   RadioButton20,
@@ -12,6 +13,7 @@ import {
 // project imports
 import { DispatchAction } from './Reducer';
 import { AppState } from './State';
+import { send } from './Socket'
 import { Instrument } from './Instruments';
 import { Visualizer } from './Visualizers';
 
@@ -102,24 +104,72 @@ function Visualizers({ state }: SideNavProps): JSX.Element {
   );
 }
 
+function SearchBar({ state, dispatch }: SideNavProps): JSX.Element {
+  const BarStyling = { width: "100%", background: "#F2F1F9", border: "none", padding: "0.5rem" };
+  const allSongs: List<any> = state.get('songs', List());  
+  const [query, setQuery] = useState('')
+
+  useEffect(() => {
+    const getAll = async () => {
+      const { songs } = await send(state.get('socket'), 'get_songs', {});
+      dispatch(new DispatchAction('SET_SONGS', { songs }));
+    }
+
+    if(query === '' && allSongs.size === 0) {
+      getAll()
+    }    
+  }, [query])
+
+  function search (query: string) {
+    if (query === '') return
+
+    const q = query.toLowerCase()
+
+    const songs = allSongs.filter((s) => s.get('songTitle').toLowerCase().includes(q))
+    songs.forEach((s) => { console.log(s.get('songTitle')) })
+
+    dispatch(new DispatchAction('SET_SONGS', { songs }))
+  }
+
+  return (
+    <div>
+      <input
+        id={'search-bar'}
+        style={BarStyling}
+        placeholder={"Search"}
+        onChange={(e) => {
+          e.preventDefault()
+          setQuery(e.target.value)
+          //console.log(e.target.value)
+          search(query)
+        }}
+      />
+      <p>{query}</p>
+    </div>
+  );
+}
+
 function Songs({ state, dispatch }: SideNavProps): JSX.Element {
   const songs: List<any> = state.get('songs', List());
   return (
-    <Section title="Playlist">
-      {songs.map(song => (
-        <div
-          key={song.get('id')}
-          className="f6 pointer underline flex items-center no-underline i dim"
-          onClick={() =>
-            dispatch(new DispatchAction('PLAY_SONG', { id: song.get('id') }))
-          }
-        >
-          <Music20 className="mr1" />
-          {song.get('songTitle')}
-        </div>
-      ))}
-    </Section>
-  );
+    <>
+      <SearchBar state={state} dispatch={dispatch} />
+      <Section title="Playlist">
+        {songs.map(song => (
+          <div
+            key={song.get('id')}
+            className="f6 pointer underline flex items-center no-underline i dim"
+            onClick={() =>
+              dispatch(new DispatchAction('PLAY_SONG', { id: song.get('id') }))
+            }
+          >
+            <Music20 className="mr1" />
+            {song.get('songTitle')}
+          </div>
+        ))}
+      </Section>
+    </>
+  )
 }
 
 export function SideNav({ state, dispatch }: SideNavProps): JSX.Element {
