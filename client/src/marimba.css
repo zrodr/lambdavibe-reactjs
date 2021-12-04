@@ -1,0 +1,10 @@
+.bg-marimba-minor-key {
+	background-image: url("./img/minor.png");
+	background-repeat: repeat;
+	background-size: 10px 10px;
+ }
+ .bg-marimba-major-key {
+	background-image: url("./img/major.png");
+	background-repeat: repeat;
+	background-size: 10px 10px;
+ }

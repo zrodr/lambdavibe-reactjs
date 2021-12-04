@@ -7,6 +7,10 @@ import { wrattan_Instrument } from './instruments/wrattan';
 import { WaveformVisualizer } from './visualizers/Waveform';
 import { wrattan_Visualizer } from './visualizers/wrattan';
 
+import {MarimbaInstrument} from './instruments/IslombekAbdulakhatov';
+import {MarimbaVisualizer} from './visualizers/MarimbaWave'
+
+
 import { DrumInstrument } from './instruments/zrodr';
 import { CircleVisualizer } from './visualizers/zrodr';
 
@@ -25,8 +29,8 @@ import { XylophoneInstru  } from './instruments/JoshLikesToCode';
  */
 export type AppState = Map<string, any>;
 
-const instruments = List([PianoInstrument,wrattan_Instrument, DrumInstrument, XylophoneInstru]);
-const visualizers = List([WaveformVisualizer,wrattan_Visualizer, CircleVisualizer, ColorfulVisualizer]);
+const instruments = List([PianoInstrument,wrattan_Instrument, DrumInstrument, XylophoneInstru, MarimbaInstrument ]);
+const visualizers = List([WaveformVisualizer,wrattan_Visualizer, CircleVisualizer, ColorfulVisualizer, MarimbaVisualizer]);
 export const defaultState: AppState = Map<string, any>({
   instruments,
   visualizers,

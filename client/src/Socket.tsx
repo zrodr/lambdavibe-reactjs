@@ -20,7 +20,8 @@ export async function send(
   const _id = idCounter++;
 
   return new Promise((resolve, reject) => {
-    socket.once(`${name}.${_id}`, resp => {
+   socket.once(`${name}.${_id}`, resp => {
+     //socket.once(`${name}`, resp => {
       const { error, ...success } = resp;
       if (success) {
         resolve(success);
