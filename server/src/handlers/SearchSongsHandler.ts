@@ -3,9 +3,8 @@ import { DB } from '../Database';
 import { MessageHandler } from '../MessageHandler';
 
 async function onMessage(msg: any): Promise<any> {
-  //validate
-  const { query } = msg
-  console.log(typeof query)
+  let { query } = msg
+  query = '%' + query + '%'
   const songs = await DB.runQuery('search_songs', query)
 
   console.log('search message')
@@ -14,7 +13,7 @@ async function onMessage(msg: any): Promise<any> {
 }
 
 const schema = {
-  query: Joi.string().alphanum().allow('')
+  query: Joi.string().allow('')
 }
 
 export const SearchSongsHandler = new MessageHandler(
