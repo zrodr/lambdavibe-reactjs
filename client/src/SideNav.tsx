@@ -106,29 +106,28 @@ function Visualizers({ state }: SideNavProps): JSX.Element {
 
 function SearchBar({ state, dispatch }: SideNavProps): JSX.Element {
   const BarStyling = { width: "100%", background: "#F2F1F9", border: "none", padding: "0.5rem" };
-  const allSongs: List<any> = state.get('songs', List());  
   const [query, setQuery] = useState('')
 
-  useEffect(() => {
-    const getAll = async () => {
+  //useEffect(() => {
+  //  const getAll = async () => {
+  //    const { songs } = await send(state.get('socket'), 'get_songs', {});
+  //    dispatch(new DispatchAction('SET_SONGS', { songs }));
+  //  }
+//
+  //  if(query === '' && allSongs.size === 0) {
+  //    getAll()
+  //  }    
+  //}, [query])
+
+  async function search (query: string) {
+    if (query === '') {
       const { songs } = await send(state.get('socket'), 'get_songs', {});
       dispatch(new DispatchAction('SET_SONGS', { songs }));
     }
-
-    if(query === '' && allSongs.size === 0) {
-      getAll()
-    }    
-  }, [query])
-
-  function search (query: string) {
-    if (query === '') return
-
-    const q = query.toLowerCase()
-
-    const songs = allSongs.filter((s) => s.get('songTitle').toLowerCase().includes(q))
-    songs.forEach((s) => { console.log(s.get('songTitle')) })
-
-    dispatch(new DispatchAction('SET_SONGS', { songs }))
+    else {
+      const { songs } = await send(state.get('socket'), 'search_songs', { query });
+      dispatch(new DispatchAction('SET_SONGS', { songs }));
+    }
   }
 
   return (
