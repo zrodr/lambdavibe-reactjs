@@ -13,4 +13,7 @@ CREATE TABLE songs (
 );
 
 INSERT INTO songs (id, song_title, notes) 
-VALUES (1, 'Ode to Joy (Dubstep Remix)', 'E4 E4 F4 G4 G4 F4 E4 D4 C4 C4 D4 E4 E4 D4 D4');
+VALUES (
+  (1, 'Ode to Joy (Dubstep Remix)', 'E4 E4 F4 G4 G4 F4 E4 D4 C4 C4 D4 E4 E4 D4 D4'),
+  (2, 'In The Air Tonight', 'E1 C2 E2 C1 G1 G1 F1 D2 D2 C1')
+);

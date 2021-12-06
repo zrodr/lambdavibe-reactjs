@@ -2,7 +2,7 @@
 import classNames from 'classnames';
 import { List } from 'immutable';
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import {
   RadioButton20,
@@ -108,17 +108,6 @@ function SearchBar({ state, dispatch }: SideNavProps): JSX.Element {
   const BarStyling = { width: "100%", background: "#F2F1F9", border: "none", padding: "0.5rem" };
   const [query, setQuery] = useState('')
 
-  //useEffect(() => {
-  //  const getAll = async () => {
-  //    const { songs } = await send(state.get('socket'), 'get_songs', {});
-  //    dispatch(new DispatchAction('SET_SONGS', { songs }));
-  //  }
-//
-  //  if(query === '' && allSongs.size === 0) {
-  //    getAll()
-  //  }    
-  //}, [query])
-
   async function search (query: string) {
     if (query === '') {
       const { songs } = await send(state.get('socket'), 'get_songs', {});
@@ -139,7 +128,6 @@ function SearchBar({ state, dispatch }: SideNavProps): JSX.Element {
         onChange={(e) => {
           e.preventDefault()
           setQuery(e.target.value)
-          //console.log(e.target.value)
           search(query)
         }}
       />
