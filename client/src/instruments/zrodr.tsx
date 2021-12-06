@@ -31,8 +31,6 @@ const Drumset = ({ synth, setSynth }: InstrumentProps) => {
     { name: 'Tom2', note: 'E1', duration: '8n' },
     { name: 'FloorTom', note: 'F2', duration: '8n' },
     { name: 'Bass', note: 'G1', duration: '8n' },
-    //{ name: 'Test1', note: 'A1', duration: '8n' },
-    //{ name: 'Test2', note: 'B1', duration: '8n' },
   ])
 
   useEffect(() => {
