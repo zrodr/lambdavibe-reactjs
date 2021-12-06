@@ -131,7 +131,6 @@ function SearchBar({ state, dispatch }: SideNavProps): JSX.Element {
           search(query)
         }}
       />
-      <p>{query}</p>
     </div>
   );
 }
