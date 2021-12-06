@@ -13,7 +13,7 @@ export const CircleVisualizer: Visualizer = new Visualizer(
     p5.noFill();
     p5.stroke(255, 255, 255, 255);
     p5.strokeWeight(5);
-    p5.translate(width / 2, height / 2)
+    p5.translate(width / 2 - (width / 12), height / 2)
     p5.scale(0.66)
     
     p5.angleMode(p5.DEGREES)
